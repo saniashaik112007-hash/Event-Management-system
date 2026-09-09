@@ -45,6 +45,14 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', system: 'College Event Management API', timestamp: new Date() });
 });
 
+// Serve the production client from the same origin as the API.
+const clientDistPath = path.resolve(__dirname, '../client/dist');
+app.use(express.static(clientDistPath));
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api/')) return next();
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
 app.use((err, req, res, next) => {
   console.error('Unhandled server error:', err);
   res.status(500).json({ error: 'Internal server error' });

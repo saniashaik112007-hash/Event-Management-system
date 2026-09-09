@@ -16,10 +16,17 @@ export async function fetchApi(endpoint, options = {}) {
     headers['x-user-id'] = activeUser.id;
   }
 
-  const response = await fetch(`${API_BASE}${endpoint}`, {
-    ...options,
-    headers
-  });
+  let response;
+  try {
+    response = await fetch(`${API_BASE}${endpoint}`, {
+      ...options,
+      headers
+    });
+  } catch (error) {
+    throw new Error(
+      'Unable to connect to the Event Management API. Start the server or check VITE_API_URL.'
+    );
+  }
 
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
