@@ -9,9 +9,11 @@ export default function LoginModal({ presetRole, onClose, onLoginSuccess }) {
   const [loading, setLoading] = useState(false);
 
   const demoAccounts = [
-    { name: 'Student (Aarav)', email: 'student1@college.edu', role: 'Student' },
-    { name: 'Committee Head (Rohan)', email: 'organizer1@college.edu', role: 'Organizing Committee' },
-    { name: 'Management Dean (Dr. Rao)', email: 'management1@college.edu', role: 'Management' }
+    { name: 'Krupa Vennela', email: 'student1@college.edu', role: 'Student' },
+    { name: 'Ananya Roy', email: 'student2@college.edu', role: 'Student' },
+    { name: 'Divya Kumar', email: 'student3@college.edu', role: 'Student' },
+    { name: 'Afsheen Patnam', email: 'organizer1@college.edu', role: 'Organizing Committee' },
+    { name: 'Dr. C. Sailusha', email: 'management1@college.edu', role: 'Management' }
   ];
 
   useEffect(() => {

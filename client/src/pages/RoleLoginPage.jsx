@@ -1,11 +1,17 @@
-import React from 'react';
-import { 
-  GraduationCap, CheckSquare, ShieldAlert, Sparkles, 
-  ArrowRight, ShieldCheck, Calendar, Lock, Users 
+import React, { useState, useEffect } from 'react';
+import {
+  GraduationCap, CheckSquare, ShieldAlert, Sparkles,
+  ArrowRight, ShieldCheck, Calendar, Lock, Users, Heart
 } from 'lucide-react';
 import { api } from '../utils/api';
 
 export default function RoleLoginPage({ onSelectRoleLogin, onGuestBrowse }) {
+  const [memories, setMemories] = useState([]);
+
+  useEffect(() => {
+    api.getGallery().then(setMemories).catch(err => console.error('Error loading memories:', err));
+  }, []);
+
   const rolePortals = [
     {
       id: 'Student',
@@ -140,6 +146,34 @@ export default function RoleLoginPage({ onSelectRoleLogin, onGuestBrowse }) {
           );
         })}
       </div>
+
+      {/* Campus Celebration Memories */}
+      {memories.length > 0 && (
+        <div className="max-w-6xl mx-auto space-y-6">
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold">
+              <Heart className="w-3.5 h-3.5 fill-pink-400" /> Campus Celebration Memories
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Moments From Our Events</h2>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {memories.slice(0, 8).map(photo => (
+              <div key={photo.id} className="glass-card rounded-2xl overflow-hidden border border-slate-800 group">
+                <div className="relative h-40 overflow-hidden">
+                  <img src={photo.image_url} alt={photo.event_name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-bold text-pink-400 border border-slate-700">
+                    {photo.category}
+                  </div>
+                </div>
+                <div className="p-3">
+                  <h4 className="font-bold text-white text-xs truncate">{photo.event_name}</h4>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Guest / Public Event Browsing Shortcut */}
       <div className="glass-card p-6 rounded-3xl border border-slate-800 text-center flex flex-col sm:flex-row items-center justify-between gap-4 max-w-3xl mx-auto bg-gradient-to-r from-slate-900 via-slate-900 to-indigo-950/40">

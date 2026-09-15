@@ -66,12 +66,13 @@ async function seed() {
   // 2. Seed Demo Users for the 3 Access Levels
   const passwordHash = await bcrypt.hash('password123', 10);
   const users = [
-    { name: 'Aarav Sharma', email: 'student1@college.edu', role_id: 1, dept: 'Computer Science', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150' },
+    { name: 'krupa vennela', email: 'student1@college.edu', role_id: 1, dept: 'Computer Science', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150' },
     { name: 'Ananya Roy', email: 'student2@college.edu', role_id: 1, dept: 'Electronics', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
-    { name: 'Rohan Mehta (Committee Head)', email: 'organizer1@college.edu', role_id: 2, dept: 'Information Technology', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150' },
+    { name: 'afsheen patnam (vice captain)', email: 'organizer1@college.edu', role_id: 2, dept: 'Information Technology', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150' },
     { name: 'Priya Verma (Committee Member)', email: 'organizer2@college.edu', role_id: 2, dept: 'Mechanical', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150' },
-    { name: 'Dr. K. S. Rao (Management Dean)', email: 'management1@college.edu', role_id: 3, dept: 'Campus Administration', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150' },
-    { name: 'Prof. Sunita Reddy (Management HOD)', email: 'management2@college.edu', role_id: 3, dept: 'Academic Operations', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150' }
+    { name: 'Dr.C.sailusha', email: 'management1@college.edu', role_id: 3, dept: 'Campus Administration', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150' },
+    { name: 'Prof. Sunita Reddy (Management HOD)', email: 'management2@college.edu', role_id: 3, dept: 'Academic Operations', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150' },
+    { name: 'Divya Kumar', email: 'student3@college.edu', role_id: 1, dept: 'Mechanical', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150' }
   ];
 
   for (const u of users) {
@@ -234,10 +235,12 @@ async function seed() {
   );
   const comp1Id = comp1.lastID;
 
-  const p1 = await dbRun(`INSERT INTO participants (competition_id, user_id, team_name, status) VALUES (?, ?, ?, ?)`, [comp1Id, 1, 'Soloist Aarav', 'REGISTERED']);
+  const p1 = await dbRun(`INSERT INTO participants (competition_id, user_id, team_name, status) VALUES (?, ?, ?, ?)`, [comp1Id, 1, 'Soloist Krupa', 'REGISTERED']);
   const p2 = await dbRun(`INSERT INTO participants (competition_id, user_id, team_name, status) VALUES (?, ?, ?, ?)`, [comp1Id, 2, 'Melody Ananya', 'REGISTERED']);
+  const p3 = await dbRun(`INSERT INTO participants (competition_id, user_id, team_name, status) VALUES (?, ?, ?, ?)`, [comp1Id, 7, 'Divya Divine', 'REGISTERED']);
   const p1Id = p1.lastID;
   const p2Id = p2.lastID;
+  const p3Id = p3.lastID;
 
   // 9. Seed Attendance Records
   await dbRun(`INSERT INTO attendance (event_id, competition_id, participant_id, user_id, status, marked_by_user_id) VALUES (?, ?, ?, ?, ?, ?)`,
@@ -267,6 +270,8 @@ async function seed() {
   // 11. Notifications
   await dbRun(`INSERT INTO notifications (user_id, title, message, type) VALUES (?, ?, ?, ?)`,
     [1, 'Registration Confirmed', 'You are registered for Solo Vocal Showdown in Symphony 2026.', 'SUCCESS']);
+  await dbRun(`INSERT INTO notifications (user_id, title, message, type) VALUES (?, ?, ?, ?)`,
+    [7, 'Registration Confirmed', 'You are registered for Solo Vocal Showdown in Symphony 2026.', 'SUCCESS']);
   await dbRun(`INSERT INTO notifications (user_id, title, message, type) VALUES (?, ?, ?, ?)`,
     [3, 'Modification Requested', 'Management requested changes on "Teachers Day Tribute". Check feedback notes.', 'WARNING']);
   await dbRun(`INSERT INTO notifications (user_id, title, message, type) VALUES (?, ?, ?, ?)`,

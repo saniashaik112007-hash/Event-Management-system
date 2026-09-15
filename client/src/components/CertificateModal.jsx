@@ -92,7 +92,7 @@ export default function CertificateModal({ certificate, onClose }) {
               {/* Signature 1 */}
               <div className="text-center">
                 <div className="h-10 text-amber-400 font-serif italic text-lg font-bold">
-                  Dr. K. S. Rao
+                  Dr.C.sailusha
                 </div>
                 <div className="w-36 h-0.5 bg-slate-700 mx-auto my-1"></div>
                 <p className="text-[10px] text-slate-400 uppercase font-semibold">Faculty Coordinator</p>

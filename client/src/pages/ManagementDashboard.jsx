@@ -241,60 +241,6 @@ export default function ManagementDashboard({ currentUser }) {
         )}
       </div>
 
-      {/* Attendance & Student Registrations Management */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
-            <CheckSquare className="w-5 h-5 text-emerald-400" /> Student Attendance Management
-          </h2>
-          <select
-            value={selectedEventId}
-            onChange={(e) => {
-              setSelectedEventId(e.target.value);
-              loadAttendance(e.target.value);
-            }}
-            className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white"
-          >
-            {events.map(ev => (
-              <option key={ev.id} value={ev.id}>{ev.title}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="glass-card rounded-2xl p-6 border border-slate-800 overflow-x-auto">
-          {(!attendanceRecords[selectedEventId] || attendanceRecords[selectedEventId].length === 0) ? (
-            <p className="text-xs text-slate-400 text-center py-6">No registrations found for this event.</p>
-          ) : (
-            <table className="w-full text-left text-xs text-slate-200">
-              <thead className="bg-slate-950 text-slate-400 text-[11px] uppercase border-b border-slate-800">
-                <tr>
-                  <th className="p-3">Student</th>
-                  <th className="p-3">Email & Dept</th>
-                  <th className="p-3">Competition</th>
-                  <th className="p-3">Attendance</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800">
-                {attendanceRecords[selectedEventId].map(rec => (
-                  <tr key={rec.participant_id} className="hover:bg-slate-900/50">
-                    <td className="p-3 font-bold text-white">{rec.student_name}</td>
-                    <td className="p-3 text-slate-400">{rec.student_email} ({rec.department})</td>
-                    <td className="p-3 text-indigo-300 font-semibold">{rec.competition_name}</td>
-                    <td className="p-3">
-                      <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold ${
-                        rec.attendance_status === 'PRESENT' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-slate-800 text-slate-400'
-                      }`}>
-                        {rec.attendance_status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </div>
-
       {/* Official Winner Declaration & Direct Event Controls */}
       <div className="space-y-4">
         <h2 className="text-xl font-extrabold text-white flex items-center gap-2">

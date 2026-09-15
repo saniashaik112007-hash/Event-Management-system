@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import RoleSwitcherBanner from './components/RoleSwitcherBanner';
 import Home from './pages/Home';
 import EventDetails from './pages/EventDetails';
 import GalleryPage from './pages/GalleryPage';
@@ -88,12 +87,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
-      
-      {/* 3-Role Simulator Bar */}
-      <RoleSwitcherBanner
-        currentUser={currentUser}
-        onUserSwitch={handleUserSwitch}
-      />
 
       {/* Main Navbar */}
       <Navbar

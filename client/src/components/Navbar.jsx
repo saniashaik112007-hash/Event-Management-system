@@ -100,29 +100,33 @@ export default function Navbar({ activeTab, setActiveTab, currentUser, onOpenLog
               </button>
             )}
 
-            <button
-              onClick={() => setActiveTab('home')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeTab === 'home'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
-              }`}
-            >
-              <Calendar className="w-4 h-4" />
-              <span>Published Events</span>
-            </button>
+            {currentUser?.role_name !== 'Organizing Committee' && (
+              <button
+                onClick={() => setActiveTab('home')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeTab === 'home'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Published Events</span>
+              </button>
+            )}
 
-            <button
-              onClick={() => setActiveTab('gallery')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeTab === 'gallery'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
-              }`}
-            >
-              <Image className="w-4 h-4 text-pink-400" />
-              <span>Memories Gallery</span>
-            </button>
+            {currentUser?.role_name !== 'Organizing Committee' && (
+              <button
+                onClick={() => setActiveTab('gallery')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeTab === 'gallery'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <Image className="w-4 h-4 text-pink-400" />
+                <span>Memories Gallery</span>
+              </button>
+            )}
           </div>
 
           {/* Right Action Bar */}

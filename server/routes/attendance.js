@@ -45,7 +45,6 @@ router.get('/event/:eventId/registrations', async (req, res) => {
         u.email as student_email,
         u.department,
         u.avatar,
-        u.roll_number,
         c.id as competition_id,
         c.name as competition_name,
         c.category as competition_category,
